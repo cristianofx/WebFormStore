@@ -1,0 +1,115 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebFormsStore.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %>  Torpedo </title>
+
+    <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+</head>
+<body>
+    <form runat="server">
+        <asp:ScriptManager runat="server">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="respond" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div id="TitleContent" style="text-align: center">
+                        <a runat="server" href="~/">
+                            <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/logo.png" BorderStyle="None" />
+                        </a>
+                        <br />
+                    </div>
+                </div>
+
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" href="~/">Torpedo</a></li>
+                        <li class="dropdown">
+                            <a id="adminLink" visible="false" runat="server" class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">Admin<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a runat="server" href="~/Admin/Gerenciar">Gerenciar</a></li>
+                                <li><a runat="server" href="~/Admin/AdminPage">Relatórios</a></li>
+                            </ul>
+                            <%-- <li><a runat="server" id="adminLink" visible="false" href="~/Admin/AdminPage">Admin</a></li>--%>
+                        <li><a runat="server" href="~/ListaProdutos">Produtos</a></li>
+                        <li class="dropdown">
+                            <a id="AdicionaProdutoMenu" visible="false" runat="server" class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">Menu do Usuário<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a runat="server" id="linkPerfil" href="~/Perfil">Meu perfil</a></li>
+                                <li><a runat="server" href="~/MeusProdutos">Meus Produtos</a></li>
+                                <li><a runat="server" href="~/AdicionarProduto">Adicionar Produto</a></li>
+                            </ul>
+                        </li>
+                        <li><a runat="server" href="~/About">Sobre</a></li>
+                        <li><a runat="server" href="~/Contact">Contato</a></li>
+                        <li><a runat="server" href="~/Carrinho" id="cartCount">&nbsp;</a></li>
+                    </ul>
+                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+
+                                <%--<li><a runat="server" href="~/Carrinho.aspx">Seu Carrinho</a></li>--%>
+                                <li><a runat="server" href="~/Account/Register">Cadastre-se</a></li>
+                                <li><a runat="server" href="~/Account/Login">Entrar</a></li>
+                            </ul>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Olá, <%: Context.User.Identity.Name  %> !</a></li>
+                                <li>
+                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                </li>
+                            </ul>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <div class="text-center" style="font-size: 8pt">&copy; <%: DateTime.Now.Year %> - Torpedo - Criado por Cristiano Guilloux e Vinicius Nunes</div>
+                <div class="text-center" style="font-size: 8pt">Icones feitos por <a href="http://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> em <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a>             Licença <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC 3.0</a></div>
+            </footer>
+        </div>
+    </form>
+</body>
+</html>
